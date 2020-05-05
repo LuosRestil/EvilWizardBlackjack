@@ -50,13 +50,21 @@ def play_again():
             continue
 
 
-def goodbye():
-    print('Thank you for playing. Goodbye.')
+def goodbye(bank):
+    if bank == 1000:
+        print("Thank you for playing. You leave Saddam's dungeon with the same money you brought into it, your head and dignity intact.")
+    elif bank - 1000 > 0:
+        print(
+            f"Thank you for playing. You leave Saddam's dungeon ${bank - 1000} richer. Well done. Well done indeed. Go forth and prosper.")
+    else:
+        print(
+            f"You leave Saddam's dungeon ${abs(bank - 1000)} poorer. You poor sap. Get out of my sight.")
 
 
 print("$" * 40)
 print("Welcome to Saddam Hussein's Blackjack!\nPrepare your anus, infidel!")
 print("$" * 40)
+bank = 1000
 while True:
     deck = cards[:]
     player_hand = []
@@ -67,6 +75,37 @@ while True:
     dealer_charlie = False
     player_bust = False
     dealer_bust = False
+
+    if bank == 0:
+        print("You have lost everything. You leave in shame, fortunate even to retain your life. Goodbye.")
+        break
+
+    print(f"Your bank: ${bank}")
+    bet = input('Place your bet: ')
+    if '$' in bet:
+        bet = bet.replace('$', '')
+    if '.' in bet:
+        bet = bet.split('.')
+        try:
+            cents = int(bet[1])
+            if cents != 0:
+                print("Your bet must be a whole number.")
+                continue
+            bet = bet[0]
+        except ValueError:
+            print("Your bet must be a number.")
+            continue
+    try:
+        bet = int(bet)
+    except ValueError:
+        print("Your bet must be a number.")
+        continue
+    if bet < 1:
+        print('Your bet must be a positive number.')
+        continue
+    if bet > bank:
+        print(f"You don't have ${bet} to bet.")
+        continue
 
     def deal_card(hand, deck):
         to_deal = random.randrange(0, len(deck))
@@ -95,6 +134,7 @@ while True:
             dealer_total = add_cards(dealer_hand)
             time.sleep(1)
             if player_total > dealer_total:
+                bank += bet
                 print('You win! Saddam is your lady boy slave!')
                 if play_again():
                     continue
@@ -131,12 +171,14 @@ while True:
                 print("Sorry, I don't recognize that command.")
 
     if player_charlie:
+        bank += bet
         print("You escaped Saddam's Blackjack Dungeon!")
         if play_again():
             continue
         else:
             break
     elif player_bust:
+        bank -= bet
         print("BUST!!! Saddam will have your eyes for this!")
         if play_again():
             continue
@@ -174,13 +216,15 @@ while True:
                 break
 
         if dealer_bust:
+            bank += bet
             print('Saddam busts!!! You teabag him in victory!')
             if play_again():
                 continue
             else:
-                goodbye()
+                goodbye(bank)
                 break
         elif dealer_charlie:
+            bank -= bet
             print(
                 "Saddam's stamina proves too great. You lose. The universe weeps for your fate.")
             if play_again():
@@ -188,25 +232,28 @@ while True:
             else:
                 break
         elif dealer_total == player_total:
+            bank -= bet
             print('You reach a stalemate with Saddam. The fates sneeze in your mouth.')
             if play_again():
                 continue
             else:
-                goodbye()
+                goodbye(bank)
                 break
         elif dealer_total > player_total:
+            bank -= bet
             print(
                 'You lose. Saddam ties you down and sticks his tongue in your nose! Too bad...')
             if play_again():
                 continue
             else:
-                goodbye()
+                goodbye(bank)
                 break
         else:
+            bank += bet
             print("You are victorious! Saddam's scalp adorns your belt forevermore.")
             if play_again():
                 continue
             else:
-                goodbye()
+                goodbye(bank)
                 break
     break
