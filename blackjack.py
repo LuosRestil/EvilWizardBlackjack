@@ -5,9 +5,13 @@ import time
 
 cards = [{'name': 'A\u2663', 'value': 11}, {'name': '2\u2663', 'value': 2}, {'name': '3\u2663', 'value': 3}, {'name': '4\u2663', 'value': 4}, {'name': '5\u2663', 'value': 5}, {'name': '6\u2663', 'value': 6}, {'name': '7\u2663', 'value': 7}, {'name': '8\u2663', 'value': 8}, {'name': '9\u2663', 'value': 9}, {'name': '10\u2663', 'value': 10}, {'name': 'J\u2663', 'value': 10}, {'name': 'Q\u2663', 'value': 10}, {'name': 'K\u2663', 'value': 10}, {'name': 'A\u2665', 'value': 11}, {'name': '2\u2665', 'value': 2}, {'name': '3\u2665', 'value': 3}, {'name': '4\u2665', 'value': 4}, {'name': '5\u2665', 'value': 5}, {'name': '6\u2665', 'value': 6}, {'name': '7\u2665', 'value': 7}, {'name': '8\u2665', 'value': 8}, {'name': '9\u2665', 'value': 9}, {'name': '10\u2665', 'value': 10}, {'name': 'J\u2665', 'value': 10}, {'name': 'Q\u2665', 'value': 10}, {'name': 'K\u2665', 'value': 10}, {
     'name': 'A\u2660', 'value': 11}, {'name': '2\u2660', 'value': 2}, {'name': '3\u2660', 'value': 3}, {'name': '4\u2660', 'value': 4}, {'name': '5\u2660', 'value': 5}, {'name': '6\u2660', 'value': 6}, {'name': '7\u2660', 'value': 7}, {'name': '8\u2660', 'value': 8}, {'name': '9\u2660', 'value': 9}, {'name': '10\u2660', 'value': 10}, {'name': 'J\u2660', 'value': 10}, {'name': 'Q\u2660', 'value': 10}, {'name': 'K\u2660', 'value': 10}, {'name': 'A\u2666', 'value': 11}, {'name': '2\u2666', 'value': 2}, {'name': '3\u2666', 'value': 3}, {'name': '4\u2666', 'value': 4}, {'name': '5\u2666', 'value': 5}, {'name': '6\u2666', 'value': 6}, {'name': '7\u2666', 'value': 7}, {'name': '8\u2666', 'value': 8}, {'name': '9\u2666', 'value': 9}, {'name': '10\u2666', 'value': 10}, {'name': 'J\u2666', 'value': 10}, {'name': 'Q\u2666', 'value': 10}, {'name': 'K\u2666', 'value': 10}]
-success_messages = []
-failure_messages = []
-tie_messages = []
+
+    # TODO add messages for randomized display
+    victory_messages = []
+    defeat_messages = []
+    tie_messages = []
+    player_bust_messages = []
+    dealer_bust_messages = []
 
 def add_cards(hand):
     """Returns the highest value of a hand without going over 21."""
