@@ -5,7 +5,9 @@ import time
 
 cards = [{'name': 'A\u2663', 'value': 11}, {'name': '2\u2663', 'value': 2}, {'name': '3\u2663', 'value': 3}, {'name': '4\u2663', 'value': 4}, {'name': '5\u2663', 'value': 5}, {'name': '6\u2663', 'value': 6}, {'name': '7\u2663', 'value': 7}, {'name': '8\u2663', 'value': 8}, {'name': '9\u2663', 'value': 9}, {'name': '10\u2663', 'value': 10}, {'name': 'J\u2663', 'value': 10}, {'name': 'Q\u2663', 'value': 10}, {'name': 'K\u2663', 'value': 10}, {'name': 'A\u2665', 'value': 11}, {'name': '2\u2665', 'value': 2}, {'name': '3\u2665', 'value': 3}, {'name': '4\u2665', 'value': 4}, {'name': '5\u2665', 'value': 5}, {'name': '6\u2665', 'value': 6}, {'name': '7\u2665', 'value': 7}, {'name': '8\u2665', 'value': 8}, {'name': '9\u2665', 'value': 9}, {'name': '10\u2665', 'value': 10}, {'name': 'J\u2665', 'value': 10}, {'name': 'Q\u2665', 'value': 10}, {'name': 'K\u2665', 'value': 10}, {
     'name': 'A\u2660', 'value': 11}, {'name': '2\u2660', 'value': 2}, {'name': '3\u2660', 'value': 3}, {'name': '4\u2660', 'value': 4}, {'name': '5\u2660', 'value': 5}, {'name': '6\u2660', 'value': 6}, {'name': '7\u2660', 'value': 7}, {'name': '8\u2660', 'value': 8}, {'name': '9\u2660', 'value': 9}, {'name': '10\u2660', 'value': 10}, {'name': 'J\u2660', 'value': 10}, {'name': 'Q\u2660', 'value': 10}, {'name': 'K\u2660', 'value': 10}, {'name': 'A\u2666', 'value': 11}, {'name': '2\u2666', 'value': 2}, {'name': '3\u2666', 'value': 3}, {'name': '4\u2666', 'value': 4}, {'name': '5\u2666', 'value': 5}, {'name': '6\u2666', 'value': 6}, {'name': '7\u2666', 'value': 7}, {'name': '8\u2666', 'value': 8}, {'name': '9\u2666', 'value': 9}, {'name': '10\u2666', 'value': 10}, {'name': 'J\u2666', 'value': 10}, {'name': 'Q\u2666', 'value': 10}, {'name': 'K\u2666', 'value': 10}]
-
+success_messages = []
+failure_messages = []
+tie_messages = []
 
 def add_cards(hand):
     """Returns the highest value of a hand without going over 21."""
@@ -35,7 +37,7 @@ def play_again():
     Returns Boolean
     """
     while True:
-        answer = input("Do you dare brave Saddam's wrath again? [y/n]")
+        answer = input("Do you dare brave the Evil Wizard's wrath again? [y/n]")
         try:
             answer = answer.lower()
         except:
@@ -52,17 +54,17 @@ def play_again():
 
 def goodbye(bank):
     if bank == 1000:
-        print("Thank you for playing. You leave Saddam's dungeon with the same money you brought into it, your head and dignity intact.")
+        print("Thank you for playing. You leave the Evil Wizards's dungeon with the same money you brought into it, your head and dignity intact.")
     elif bank - 1000 > 0:
         print(
-            f"Thank you for playing. You leave Saddam's dungeon ${bank - 1000} richer. Well done. Well done indeed. Go forth and prosper.")
+            f"Thank you for playing. You leave the Evil Wizard's dungeon ${bank - 1000} richer. Well done. Well done indeed. Go forth and prosper.")
     else:
         print(
-            f"You leave Saddam's dungeon ${abs(bank - 1000)} poorer. You poor sap. Get out of my sight.")
+            f"You leave the Evil Wizard's dungeon ${abs(bank - 1000)} poorer. You poor sap. Get out of my sight.")
 
 
 print("$" * 40)
-print("Welcome to Saddam Hussein's Blackjack!\nPrepare your anus, infidel!")
+print("Welcome to Evil Wizard's Blackjack!\nPrepare yourself, weakling!")
 print("$" * 40)
 bank = 1000
 while True:
@@ -120,14 +122,14 @@ while True:
         for card in player_hand:
             print(card["name"], end=" ")
         print()
-        print(f"Saddam's hand: [X] {dealer_hand[1]['name']}")
+        print(f"Evil Wizard's hand: [X] {dealer_hand[1]['name']}")
         player_total = add_cards(player_hand)
         if len(player_hand) == 2 and player_total == 21:
             print("BLACKJACK!!!")
             time.sleep(1)
-            print("Can this be the end for Saddam?...")
+            print("Can this be the end for the Evil Wizard?...")
             time.sleep(1)
-            print("Saddam's hand:", end=" ")
+            print("Evil Wizard's hand:", end=" ")
             for card in dealer_hand:
                 print(card["name"], end=" ")
             print()
@@ -135,7 +137,7 @@ while True:
             time.sleep(1)
             if player_total > dealer_total:
                 bank += bet
-                print('You win! Saddam is your lady boy slave!')
+                print('You win! The Evil Wizard bows to you, defeated!')
                 if play_again():
                     continue
                 else:
@@ -172,14 +174,14 @@ while True:
 
     if player_charlie:
         bank += bet
-        print("You escaped Saddam's Blackjack Dungeon!")
+        print("You escaped the Evil Wizard's Blackjack Dungeon!")
         if play_again():
             continue
         else:
             break
     elif player_bust:
         bank -= bet
-        print("BUST!!! Saddam will have your eyes for this!")
+        print("BUST!!! The Evil Wizard will have your eyes for this!")
         if play_again():
             continue
         else:
@@ -187,7 +189,7 @@ while True:
     else:
         # dealer's turn
         print("#" * 40)
-        print("Saddam's turn!")
+        print("Evil Wizard's turn!")
         print("#" * 40)
         while True:
             print("*" * 40)
@@ -195,7 +197,7 @@ while True:
             for card in player_hand:
                 print(card["name"], end=" ")
             print()
-            print("Saddam's hand:", end=" ")
+            print("Evil Wizard's hand:", end=" ")
             for card in dealer_hand:
                 print(card["name"], end=" ")
             print()
@@ -209,7 +211,7 @@ while True:
                 break
             elif dealer_total < player_total:
                 time.sleep(1)
-                print('Saddam hits.')
+                print('The Evil Wizard hits.')
                 time.sleep(1)
                 deal_card(dealer_hand, deck)
             elif dealer_total >= player_total:
@@ -217,7 +219,7 @@ while True:
 
         if dealer_bust:
             bank += bet
-            print('Saddam busts!!! You teabag him in victory!')
+            print('The Evil Wizard busts!!! You teabag him in victory!')
             if play_again():
                 continue
             else:
@@ -226,14 +228,14 @@ while True:
         elif dealer_charlie:
             bank -= bet
             print(
-                "Saddam's stamina proves too great. You lose. The universe weeps for your fate.")
+                "The Evil Wizard's stamina proves too great. You lose. The universe weeps for your fate.")
             if play_again():
                 continue
             else:
                 break
         elif dealer_total == player_total:
             bank -= bet
-            print('You reach a stalemate with Saddam. The fates sneeze in your mouth.')
+            print('You reach a stalemate with the Evil Wizard. The fates sneeze in your mouth.')
             if play_again():
                 continue
             else:
@@ -242,7 +244,7 @@ while True:
         elif dealer_total > player_total:
             bank -= bet
             print(
-                'You lose. Saddam ties you down and sticks his tongue in your nose! Too bad...')
+                'You lose. The Evil Wizard ties you down and sticks his tongue in your nose! Too bad...')
             if play_again():
                 continue
             else:
@@ -250,7 +252,7 @@ while True:
                 break
         else:
             bank += bet
-            print("You are victorious! Saddam's scalp adorns your belt forevermore.")
+            print("You are victorious! The Evil Wizard's scalp adorns your belt forevermore.")
             if play_again():
                 continue
             else:
