@@ -7,11 +7,17 @@ cards = [{'name': 'A\u2663', 'value': 11}, {'name': '2\u2663', 'value': 2}, {'na
     'name': 'A\u2660', 'value': 11}, {'name': '2\u2660', 'value': 2}, {'name': '3\u2660', 'value': 3}, {'name': '4\u2660', 'value': 4}, {'name': '5\u2660', 'value': 5}, {'name': '6\u2660', 'value': 6}, {'name': '7\u2660', 'value': 7}, {'name': '8\u2660', 'value': 8}, {'name': '9\u2660', 'value': 9}, {'name': '10\u2660', 'value': 10}, {'name': 'J\u2660', 'value': 10}, {'name': 'Q\u2660', 'value': 10}, {'name': 'K\u2660', 'value': 10}, {'name': 'A\u2666', 'value': 11}, {'name': '2\u2666', 'value': 2}, {'name': '3\u2666', 'value': 3}, {'name': '4\u2666', 'value': 4}, {'name': '5\u2666', 'value': 5}, {'name': '6\u2666', 'value': 6}, {'name': '7\u2666', 'value': 7}, {'name': '8\u2666', 'value': 8}, {'name': '9\u2666', 'value': 9}, {'name': '10\u2666', 'value': 10}, {'name': 'J\u2666', 'value': 10}, {'name': 'Q\u2666', 'value': 10}, {'name': 'K\u2666', 'value': 10}]
 
 # TODO add messages for randomized display
-victory_messages = []
-defeat_messages = []
-tie_messages = []
-player_bust_messages = []
+victory_messages = ['You win! The Evil Wizard bows to you, defeated!', 'Victory is yours! You yank a hair out of the Evil Wizard\'s beard.', 'You win! A fanfare of trumpets flourishes around you and the Wizard withers in shame.', 'You win! The Wizard shrinks in your estimation.', 'You are victorious! You step on the Evil Wizard\'s toes.', 'You win! The Evil Wizard looks sad. Did you just catch a momentary glimpse of his lost humanity?', 'You win! The sound of cheering echoes into the room from somewhere far beyond in the darkness.', 'You win! You absorb some of the Evil Wizard\'s ill-gotten wealth.', 'Victory is yours! The Evil Wizard grinds his teeth with rage as you boop him on the snoot.']
+defeat_messages = ['You lose. The Evil Wizard sticks his tongue up your nose.', 'You lose. The Evil Wizard shrinks your head.', 'You lose. The Evil Wizard laughs and calls you names in an eldritch tongue long forgotten by mortal man.', 'You lose. You hear shrieks of agony from the outer darkness and fear grips your heart.', 'The Wizard comes out on top this time. A thick, foul smell oozes from him, threatening your consciousness.', 'The Wizard waves his hand and adds your money to his untold hoard of riches. You lose.', 'You lose. You get nothing. Good day.', 'Your best wasn\'t good enough. You lose. The Wizard hocks a loogie of a color unknown to this world onto your shoe.', 'You lose. You can feel your bones beginning to soften under the Wizard\'s evil stare.']
+tie_messages = ['You reach a stalemate with the Evil Wizard. The fates sneeze in your mouth.', "It's a tie. So close, yet so far away.", "It's a tie. The Wizard's hand oozes from his robe to take your money."]
+player_bust_messages = ["BUST!!! The Evil Wizard will have your eyes for this!", "BUST!!! Your greed has driven you to destruction.", "BUST!!! Has the Wizard bent your mind to his own purposes?", "BUST!!! The room swims before your eyes as the Evil Wizard's miasma enfolds you.", "BUST!!! Who needs enemies when you can defeat yourself?", "BUST!!! You feel a hand close around your throat. It is your own! The Wizard cackles with delight.", "You BUST!!!"]
 dealer_bust_messages = []
+
+def message(message_array):
+    """
+    Prints a random message from the array of messages passed as an argument.
+    """
+    print(message_array[random.randrange(0, len(message_array))])
 
 def add_cards(hand):
     """Returns the highest value of a hand without going over 21."""
@@ -141,7 +147,7 @@ while True:
             time.sleep(1)
             if player_total > dealer_total:
                 bank += bet
-                print('You win! The Evil Wizard bows to you, defeated!')
+                message(victory_messages)
                 if play_again():
                     continue
                 else:
@@ -178,14 +184,14 @@ while True:
 
     if player_charlie:
         bank += bet
-        print("You escaped the Evil Wizard's Blackjack Dungeon!")
+        message(victory_messages)
         if play_again():
             continue
         else:
             break
     elif player_bust:
         bank -= bet
-        print("BUST!!! The Evil Wizard will have your eyes for this!")
+        message(player_bust_messages)
         if play_again():
             continue
         else:
@@ -223,7 +229,7 @@ while True:
 
         if dealer_bust:
             bank += bet
-            print('The Evil Wizard busts!!! You teabag him in victory!')
+            message(dealer_bust_messages)
             if play_again():
                 continue
             else:
@@ -231,15 +237,14 @@ while True:
                 break
         elif dealer_charlie:
             bank -= bet
-            print(
-                "The Evil Wizard's stamina proves too great. You lose. The universe weeps for your fate.")
+            message(defeat_messages)
             if play_again():
                 continue
             else:
                 break
         elif dealer_total == player_total:
             bank -= bet
-            print('You reach a stalemate with the Evil Wizard. The fates sneeze in your mouth.')
+            message(tie_messages)
             if play_again():
                 continue
             else:
@@ -247,8 +252,7 @@ while True:
                 break
         elif dealer_total > player_total:
             bank -= bet
-            print(
-                'You lose. The Evil Wizard ties you down and sticks his tongue in your nose! Too bad...')
+            message(defeat_messages)
             if play_again():
                 continue
             else:
@@ -256,7 +260,7 @@ while True:
                 break
         else:
             bank += bet
-            print("You are victorious! The Evil Wizard's scalp adorns your belt forevermore.")
+            message(victory_messages)
             if play_again():
                 continue
             else:
